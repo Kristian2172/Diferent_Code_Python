@@ -1,87 +1,38 @@
-from collections import namedtuple
+# Par ou impar
 
-Player = namedtuple("Player", "name age rating")
+for i in range(1, 6):
+    if i % 2 == 0:
+        print(str(i) + " é par")
+    else:
+        print(str(i) + " é impar")
 
-player_Car = Player("Carlsen", 1990, 2842)
-player_Caru = Player("Caruana", 1992, 2822)
-player_Mamed = Player("Mamedyarov", 1985, 2801)
+# Exercicio usando tuple
+persons = [("John", 22), ("Bob", 32), ("Dave", 20)]
 
-while True:
+for (name, age) in persons:
+    print(f"{name} is {age} years old")
 
-    # Menu
-    print("1 - Carlsen \n"
-          "2 - Caruana \n"
-          "3 - Mamedyarov")
+# Outro exercicio usando tuple
+players = dict(Calsen=2842, Caruana=2822, Mamedyarov=2801)
 
-    escolha = input("Escolha um dos seguintes jogadores: ")
+for item in players:
+    print(item)
 
-    if escolha == "1":
-        print("1 - Nome \n"
-              "2 - Ano \n"
-              "3 - Pontos \n"
-              "4 - Toda a informação")
+for item in players.items():
+    print(item)
 
-        escolha_Car = input("Escolha o que deseja saber sobre o jogador: ")
-        if escolha_Car == "1":
-            print(player_Car.name)
+for k, v in players.items():
+    print(f"{k} has rating {v}")
 
-        elif escolha_Car == "2":
-            print(player_Car.age)
+# find all pairs sum of which equals 0
+list1 = [2, 4, -5, 6, 8, -2]
+list2 = [2, -6, 8, 3, 5, -2]
 
-        elif escolha_Car == "3":
-            print(player_Car.rating)
+pairs = []
+for x in list1:
+    for y in list2:
+        cur_sum = x + y
+        if cur_sum == 0:
+            pairs.append((x, y))
 
-        elif escolha_Car == "4":
-            print(player_Car)
-
-        else:
-            print("Ocorreu um erro!!")
-
-    if escolha == "2":
-        print("1 - Nome \n"
-              "2 - Ano \n"
-              "3 - Pontos \n"
-              "4 - Toda a informação")
-
-        escolha_Caru = input("Escolha o que deseja saber sobre o jogador: ")
-        if escolha_Caru == "1":
-            print(player_Caru.name)
-
-        elif escolha_Caru == "2":
-            print(player_Caru.age)
-
-        elif escolha_Caru == "3":
-            print(player_Caru.rating)
-
-        elif escolha_Caru == "4":
-            print(player_Caru)
-
-        else:
-            print("Ocorreu um erro!!")
-
-    if escolha == "3":
-        print("1 - Nome \n"
-              "2 - Ano \n"
-              "3 - Pontos \n"
-              "4 - Toda a informação")
-
-        escolha_Mamed = input("Escolha o que deseja saber sobre o jogador: ")
-        if escolha_Mamed == "1":
-            print(player_Mamed.name)
-
-        elif escolha_Mamed == "2":
-            print(player_Mamed.age)
-
-        elif escolha_Mamed == "3":
-            print(player_Mamed.rating)
-
-        elif escolha_Mamed == "4":
-            print(player_Mamed)
-
-        else:
-            print("Ocorreu um erro!!")
-
-    escolha_exit = input("Deseja continuar? (s,n): ")
-
-    if escolha_exit == "n":
-        break
+print(pairs)
