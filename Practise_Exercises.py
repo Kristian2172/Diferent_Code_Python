@@ -1,38 +1,30 @@
-# Par ou impar
+greeting = "hello, world"
+chars = []
 
-for i in range(1, 6):
-    if i % 2 == 0:
-        print(str(i) + " é par")
-    else:
-        print(str(i) + " é impar")
+for x in greeting:
+    chars.append(x)
 
-# Exercicio usando tuple
-persons = [("John", 22), ("Bob", 32), ("Dave", 20)]
+print(chars)
 
-for (name, age) in persons:
-    print(f"{name} is {age} years old")
+# O resultado destes dois codigos é o mesmo mas a estrutura é diferente
 
-# Outro exercicio usando tuple
-players = dict(Calsen=2842, Caruana=2822, Mamedyarov=2801)
+chars = [i for i in greeting]
+print(chars)
 
-for item in players:
-    print(item)
+# Outros exemplos onde podemos usar o list comprehension
+numbers = [n for n in range(0, 11)]
+print(numbers)
 
-for item in players.items():
-    print(item)
+numbers = [n * n for n in range(0, 11)]
+print(numbers)
 
-for k, v in players.items():
-    print(f"{k} has rating {v}")
+# Mostra a multiplicacao dos numeros impares
+numbers = [n * n for n in range(0, 11) if n % 2 != 0]
+print(numbers)
 
-# find all pairs sum of which equals 0
-list1 = [2, 4, -5, 6, 8, -2]
-list2 = [2, -6, 8, 3, 5, -2]
+# Conversão de centimentros para polegadas
+len_in_centi = [12, 10, 54, 124, 64]
+len_in_inches = [(round(cm / 2.54, 2)) for cm in len_in_centi]
+print(len_in_inches)
 
-pairs = []
-for x in list1:
-    for y in list2:
-        cur_sum = x + y
-        if cur_sum == 0:
-            pairs.append((x, y))
 
-print(pairs)
