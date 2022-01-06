@@ -1,52 +1,35 @@
-def square(*args):
-    return [x * x for x in args]
+greeting = "Hello from the global scope"
 
 
-# Quando vai se executar o codigo o que vai ser executado vai ser da classe list
+def greet():
+    greeting = "Hello from enclosing scope"
 
-result = square(1, 2, 3, 4, 5)
-print(result)
-print(type(result))
-
-
-def triple(*args):
-    return [x * 3 for x in args]
+    def nested():
+        greeting = "Hello from local scope"
+        print(greeting)
+    nested()
 
 
-result = triple(1, 2, 3, 4, 5)
-print(result)
+greet()
+print(greeting)
 
 
-# Quando vai se executar o codigo o que vai ser executado vai ser da classe int
-
-def square(number):
-    return number * number
+greeting = "Hello from the global scope"
 
 
-numbers = [1, 2, 3, 4, 5]
+def greet():
+    global greeting
+    print(f"Greet in func: {greeting}")
 
-mapped_seq = map(square, numbers)
-for x in mapped_seq:
-    print(x)
+    greeting = "Hello from enclosing scope"
 
+    print(f"Greet in func: {greeting}")
 
-# A função "filter" permite filtrar o codigo onde é necessario
-
-def is_adult(age):
-    return age >= 18
-
-
-ages = [14, 18, 21, 16, 30]
-
-print(list(filter(is_adult, ages)))
+    def nested():
+        greeting = "Hello from local scope"
+        print(greeting)
+    nested()
 
 
-# Exemplos de uso de "lambda"
-
-is_adult = lambda age: age >= 18
-
-print(list(filter(is_adult, ages)))
-
-multiplier = lambda z, y: z * y
-print(multiplier(2, 3))
-
+greet()
+print(greeting)
