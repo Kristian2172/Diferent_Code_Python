@@ -1,59 +1,52 @@
-def greeting():
-    print("Hello World")
+def square(*args):
+    return [x * x for x in args]
 
 
-def print_name(name):
-    print(name)
+# Quando vai se executar o codigo o que vai ser executado vai ser da classe list
+
+result = square(1, 2, 3, 4, 5)
+print(result)
+print(type(result))
 
 
-print_name("John")
+def triple(*args):
+    return [x * 3 for x in args]
 
 
-def get_sum(a, b):
-    return a + b
-
-
-result = get_sum(10, 2)
+result = triple(1, 2, 3, 4, 5)
 print(result)
 
+
+# Quando vai se executar o codigo o que vai ser executado vai ser da classe int
+
+def square(number):
+    return number * number
+
+
+numbers = [1, 2, 3, 4, 5]
+
+mapped_seq = map(square, numbers)
+for x in mapped_seq:
+    print(x)
+
+
+# A função "filter" permite filtrar o codigo onde é necessario
 
 def is_adult(age):
     return age >= 18
 
 
-is_adult = is_adult(20)
-print(is_adult)
+ages = [14, 18, 21, 16, 30]
+
+print(list(filter(is_adult, ages)))
 
 
-def is_palindrome(text):
-    return text == text[::-1]
+# Exemplos de uso de "lambda"
 
+is_adult = lambda age: age >= 18
 
-is_palindrome("aabaa")
-is_palindrome("aabba")
+print(list(filter(is_adult, ages)))
 
+multiplier = lambda z, y: z * y
+print(multiplier(2, 3))
 
-def calc_taxes(p1, p2, p3):
-    return sum((p1, p2, p3)) * 0.06
-
-
-calc_taxes(10, 20, 30)
-
-
-# Para receber inumeros argumentos temos de meter *args
-def calc_taxes(*args):
-    for x in args:
-        print(f"Got payment = {x}")
-    return sum(args) * 0.06
-
-
-calc_taxes(10, 20, 30, 40)
-
-
-# Para receber inumeros argumentos que contêm key values pairs devemos de meter **kwargs
-def save_players(**kwargs):
-    for k, v in kwargs.items():
-        print(f"Player {k} has rating {v}")
-
-
-save_players(Carlsen=2800, Giri=2780)
