@@ -1,24 +1,22 @@
+from functools import wraps
+
+# Se não utilizar-mos estas instruções a função hello vai ser igual há função wrap(decorator), mas utilizando estas
+# instruções a função hello vai ser igual há função hello, como deve ser...
+
+
 def log_decorator(func):
-    def wrap():
+    @wraps(func)
+    def wrap(*args, **kwargs):
         print(f"Calling func: {func}")
-        func()
+        func(*args, **kwargs)
         print(f"Func {func} finished its work")
     return wrap
 
 
-def hello():
-    print("hello, world!")
-
-
-wrapped_by_logger = log_decorator(hello)
-wrapped_by_logger()
-
-
-# O resultado da execusão deste codigo vai ser o mesmo, só que aqui é utilizado uma nova instrução
 @log_decorator
 def hello():
     print("hello, world!")
 
 
-hello()
-
+# Utilizamos help para ver se esta tudo bem com a nossa função
+help(hello)
