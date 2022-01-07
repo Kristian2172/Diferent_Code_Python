@@ -1,35 +1,24 @@
-greeting = "Hello from the global scope"
+def log_decorator(func):
+    def wrap():
+        print(f"Calling func: {func}")
+        func()
+        print(f"Func {func} finished its work")
+    return wrap
 
 
-def greet():
-    greeting = "Hello from enclosing scope"
-
-    def nested():
-        greeting = "Hello from local scope"
-        print(greeting)
-    nested()
+def hello():
+    print("hello, world!")
 
 
-greet()
-print(greeting)
+wrapped_by_logger = log_decorator(hello)
+wrapped_by_logger()
 
 
-greeting = "Hello from the global scope"
+# O resultado da execusão deste codigo vai ser o mesmo, só que aqui é utilizado uma nova instrução
+@log_decorator
+def hello():
+    print("hello, world!")
 
 
-def greet():
-    global greeting
-    print(f"Greet in func: {greeting}")
+hello()
 
-    greeting = "Hello from enclosing scope"
-
-    print(f"Greet in func: {greeting}")
-
-    def nested():
-        greeting = "Hello from local scope"
-        print(greeting)
-    nested()
-
-
-greet()
-print(greeting)
