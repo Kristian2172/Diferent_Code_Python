@@ -1,42 +1,32 @@
-def divide(a, b):
-    try:
-        return a / b
-    except ZeroDivisionError as ex:
-        print(f"an error occured: {ex}")
-    except:
-        print("unknown error occured!")
+import math
 
 
-#print(divide(4, 0))
+# Usamos "ValueError" como ja existe na biblioteca python
+def calc_square(ab, ac, bc):
+    if ab <= 0 or ac <= 0 or bc <= 0:
+        raise ValueError("One of the sides is less or equal to 0!")
 
-#divider = input()
-#print(divide(4, divider))
+    p = (ab + ac + bc) / 2
+    s = math.sqrt(p * (p - ab) * (p - ac) * (p - bc))
 
-file = None
-try:
-    file = open(r"C:\tmp\abracadabra.txt")
-    data = file.read()
-except FileNotFoundError as ex:
-    print(f"Error has occured. Description: {ex.strerror}")
-else:
-    print("maybe else")
-finally:
-    print("Finally")
-    if file:
-        file.close()
-
-print("doing some work here")
+    return s
 
 
-def get_int():
-    while True:
-        try:
-            reply = int(input("Enter a number..."))
-            print("Thanks!")
-            return reply
-        except:
-            print("Not a number!! Try again.")
-            continue
+# square = calc_square(-2, 8, 8)
+
+# Construção da propria instrução de erro
+class InvalidTriangleError(Exception):
+    """Raised when a triangle has invalid sides"""
 
 
-number = get_int()
+def calc_square(ab, ac, bc):
+    if ab <= 0 or ac <= 0 or bc <= 0:
+        raise InvalidTriangleError("One of the sides is less or equal to 0!")
+
+    p = (ab + ac + bc) / 2
+    s = math.sqrt(p * (p - ab) * (p - ac) * (p - bc))
+
+    return s
+
+
+square = calc_square(-2, 8, 8)
