@@ -1,22 +1,42 @@
-from functools import wraps
-
-# Se não utilizar-mos estas instruções a função hello vai ser igual há função wrap(decorator), mas utilizando estas
-# instruções a função hello vai ser igual há função hello, como deve ser...
-
-
-def log_decorator(func):
-    @wraps(func)
-    def wrap(*args, **kwargs):
-        print(f"Calling func: {func}")
-        func(*args, **kwargs)
-        print(f"Func {func} finished its work")
-    return wrap
+def divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError as ex:
+        print(f"an error occured: {ex}")
+    except:
+        print("unknown error occured!")
 
 
-@log_decorator
-def hello():
-    print("hello, world!")
+#print(divide(4, 0))
+
+#divider = input()
+#print(divide(4, divider))
+
+file = None
+try:
+    file = open(r"C:\tmp\abracadabra.txt")
+    data = file.read()
+except FileNotFoundError as ex:
+    print(f"Error has occured. Description: {ex.strerror}")
+else:
+    print("maybe else")
+finally:
+    print("Finally")
+    if file:
+        file.close()
+
+print("doing some work here")
 
 
-# Utilizamos help para ver se esta tudo bem com a nossa função
-help(hello)
+def get_int():
+    while True:
+        try:
+            reply = int(input("Enter a number..."))
+            print("Thanks!")
+            return reply
+        except:
+            print("Not a number!! Try again.")
+            continue
+
+
+number = get_int()
