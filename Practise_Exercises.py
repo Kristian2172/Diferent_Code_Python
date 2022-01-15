@@ -1,32 +1,13 @@
-import math
+class Character:
+
+    def __init__(self, race, damage=10, armor=20):
+        # Criação dos atributos
+        self.race = race
+        self.damage = damage
+        self.armor = armor
 
 
-# Usamos "ValueError" como ja existe na biblioteca python
-def calc_square(ab, ac, bc):
-    if ab <= 0 or ac <= 0 or bc <= 0:
-        raise ValueError("One of the sides is less or equal to 0!")
+unit = Character("Elf", 20, 40)
 
-    p = (ab + ac + bc) / 2
-    s = math.sqrt(p * (p - ab) * (p - ac) * (p - bc))
-
-    return s
-
-
-# square = calc_square(-2, 8, 8)
-
-# Construção da propria instrução de erro
-class InvalidTriangleError(Exception):
-    """Raised when a triangle has invalid sides"""
-
-
-def calc_square(ab, ac, bc):
-    if ab <= 0 or ac <= 0 or bc <= 0:
-        raise InvalidTriangleError("One of the sides is less or equal to 0!")
-
-    p = (ab + ac + bc) / 2
-    s = math.sqrt(p * (p - ab) * (p - ac) * (p - bc))
-
-    return s
-
-
-square = calc_square(-2, 8, 8)
+print(unit.damage)
+print(unit.armor)
