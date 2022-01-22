@@ -1,52 +1,61 @@
-class Character:
-    # Constants
-    MAX_SPEED = 100
-
-    def __init__(self, race, damage=10):
-        self.damage = damage
-        # private
-        self.__race = race
-        # semi-privados - não se vêm mas podem ser modificados
-        self._health = 100
-
-        self._current_speed = 20
-
-    def hit(self, damage):
-        self._health -= damage
-
-    # @property dá permissão para ser lido os atributos privados e semi-privados
-    @property
-    def health(self):
-        return self._health
-
-    @property
-    def race(self):
-        return self.__race
-
-    @property
-    def current_speed(self):
-        return self._current_speed
-
-    # Propriedade com a possibilidade de ser introduzido informação
-    @current_speed.setter
-    def current_speed(self, current_speed):
-        if current_speed < 0:
-            self._current_speed = 0
-        elif current_speed > 100:
-            self._current_speed = 100
-        else:
-            self._current_speed = current_speed
+class StaticTest:
+    x = 1
 
 
-c = Character("Elf")
+t1 = StaticTest()
 
-print(c.health)
-print(c.race)
+print(f"via instance: {t1.x}")
+print(f"Via class: {StaticTest.x}")
 
-print(c.current_speed)
-c.current_speed = 50
-print(c.current_speed)
-c.current_speed = 1000
-print(c.current_speed)
-c.current_speed = -10
-print(c.current_speed)
+# Esta atribuição acontece ao nivel da instancia
+t1.x = 2
+
+# Estes dois 'x' que estam abaixo sao dois diferentes atributos
+print(f"Via instance: {t1.x}")
+print(f"Via class: {StaticTest.x}")
+
+# Esta atribuição ja acontece ao nivel da classe
+StaticTest.x = 3
+
+print(f"Via instance: {t1.x}")
+print(f"Via class: {StaticTest.x}")
+
+
+class Date:
+    def __init__(self, month, day, year):
+        self.month = month
+        self.day = day
+        self.year = year
+
+    def display(self):
+        return f"{self.month}-{self.day}-{self.year}"
+
+    @classmethod
+    def millenium_c(cls, month, day):
+        return cls(month, day, 2000)
+
+    @staticmethod
+    def millenium_s(month, day):
+        return Date(month, day, 2000)
+
+
+d1 = Date.millenium_c(6, 9)
+d2 = Date.millenium_s(6, 9)
+
+print(d1.display())
+print(d2.display())
+
+
+class DateTime(Date):
+    def display(self):
+        return f"{self.month}-{self.day}-{self.year} - 00:00:00PM"
+
+
+dt1 = DateTime(10, 10, 1990)
+dt2 = DateTime.millenium_c(10, 10)
+
+print(isinstance(dt1, DateTime))
+print(isinstance(dt2, DateTime))
+
+print(dt1.display())
+print(dt2.display())
