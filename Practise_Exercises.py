@@ -1,61 +1,80 @@
-class StaticTest:
-    x = 1
+import math
 
 
-t1 = StaticTest()
+class Shape:
 
-print(f"via instance: {t1.x}")
-print(f"Via class: {StaticTest.x}")
+    def __init__(self):
+        print("Shape created")
 
-# Esta atribuição acontece ao nivel da instancia
-t1.x = 2
+    def draw(self):
+        print("Drawing a shape")
 
-# Estes dois 'x' que estam abaixo sao dois diferentes atributos
-print(f"Via instance: {t1.x}")
-print(f"Via class: {StaticTest.x}")
+    def area(self):
+        print("Calc area")
 
-# Esta atribuição ja acontece ao nivel da classe
-StaticTest.x = 3
-
-print(f"Via instance: {t1.x}")
-print(f"Via class: {StaticTest.x}")
+    def perimeter(self):
+        print("Calc perimeter")
 
 
-class Date:
-    def __init__(self, month, day, year):
-        self.month = month
-        self.day = day
-        self.year = year
+shape = Shape()
 
-    def display(self):
-        return f"{self.month}-{self.day}-{self.year}"
-
-    @classmethod
-    def millenium_c(cls, month, day):
-        return cls(month, day, 2000)
-
-    @staticmethod
-    def millenium_s(month, day):
-        return Date(month, day, 2000)
+print("")
 
 
-d1 = Date.millenium_c(6, 9)
-d2 = Date.millenium_s(6, 9)
+# Dentro desta classe nós temos acesso aos elementos(metodos) da classe 'Shape'
+class Rectangle(Shape):
 
-print(d1.display())
-print(d2.display())
+    def __init__(self, width, height):
+        Shape.__init__(self)
+
+        self.width = width
+        self.height = height
+
+        print("Rectangle created")
+
+        Shape.area(self)
+
+    def area(self):
+        return self.width * self.height
+
+    def perimeter(self):
+        return 2 * (self.width + self.height)
+
+    def draw(self):
+        print(f"Drawing rectangle with width = {self.width} and height = {self.height}")
 
 
-class DateTime(Date):
-    def display(self):
-        return f"{self.month}-{self.day}-{self.year} - 00:00:00PM"
+rect = Rectangle(10, 15)
+
+print(rect.perimeter())
+print(rect.draw())
+print("")
 
 
-dt1 = DateTime(10, 10, 1990)
-dt2 = DateTime.millenium_c(10, 10)
+class Triangle(Shape):
 
-print(isinstance(dt1, DateTime))
-print(isinstance(dt2, DateTime))
+    def __init__(self, a, b, c):
+        Shape.__init__(self)
 
-print(dt1.display())
-print(dt2.display())
+        self.a = a
+        self.b = b
+        self.c = c
+
+        print("Triangle created")
+
+    def draw(self):
+        print(f"Drawing triangle with sides = {self.a}, {self.b}, {self.c}")
+
+    def area(self):
+        s = (self.a + self.b + self.c) / 2
+        return math.sqrt(s * (s - self.a) * (s - self.b) * (s - self.c))
+
+    def perimeter(self):
+        return self.a + self.b + self.c
+
+
+triangle = Triangle(10, 10, 10)
+
+triangle.draw()
+print(triangle.area())
+print(triangle.perimeter())
